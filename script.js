@@ -14,7 +14,6 @@ function setTime() {
       secondsLeft--;
       timeEl.textContent = "Time: "+ secondsLeft;
   
-      var 
       if(secondsLeft === 0) {
         clearInterval(timerInterval);
         sendMessage();
@@ -42,8 +41,9 @@ function setTime() {
         }
         qIndex++;
         return startQuiz();
-        })
-        container.appendChild(button)
+        });
+       
+        container.appendChild(button);
     }
  }
 startQuiz()
