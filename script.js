@@ -1,5 +1,6 @@
 
 var questionsEl = document.querySelector("#questions");
+var arrayQues = document.querySelector("#queAnswers");
 var qIndex = 0;
 var oIndex = 0;
 var timeEl = document.querySelector(".time");
@@ -27,28 +28,34 @@ function setTime() {
  function startQuiz() {
     questionsEl.innerHTML = questions[qIndex].title;
     
-     for (var i=0; i < questions[qIndex].choices.length;i++) {
-        var button = document.createElement("button")
+    for (var i = 0; i < questions[qIndex].choices.length ; i++) {
+        var button = document.createElement("button");
         button.textContent = questions[qIndex].choices[i];
-        // var container = document.querySelector("#container");
+        arrayQues.appendChild(button);
+    
+        // Set the button event listener
         button.addEventListener("click", function(event) {
-        var userGuess = event.target.textContent;
-        if (userGuess === questions[qIndex].answer) {
-        alert("Correct!");     
-        }
-        else {
-            alert("False");
-        }
-        qIndex++;
-        return startQuiz();
-        });
-       
-        container.appendChild(button);
+          var userChoice = event.target.textContent;
+          if (userChoice === questions[qIndex].answer) {
+            alert("CORRECT!") 
+            qIndex++;
+          } else { 
+            alert("FALSE!")
+            secondsLeft = secondsLeft-15 ;
+          }
+         
+          if (qIndex < 4) {
+            qIndex++;
+            
+          } else {
+            clearInterval(timerInterval);
+            alert("Your score is: " + score)
+          }
+    
+          arrayQues.innerHTML = "";
+    
+          return startQuiz();
+        })
+      }
     }
- }
-startQuiz()
-
-
-
-
-// alert("Total correct " + correct + "\nTotal ties: " + ties + "\nTotal losses: " + losses);
+    startQuiz();
